@@ -7,7 +7,7 @@ module Lita
 
       route(/(?:^|_)(\d{1,3}|\d{1,2}\.\d+)(?:$|_)/, :convert, command: false, help: {
           '<number>' => 'Convert glucose between mass/molar concentration units.',
-          '\_<number>\_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at \_125\_ today"'
+          '_<number>_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at _125_ today"'
       })
 
       route(/estimate a1c(?: from average)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_a1c, command: true, help: {
