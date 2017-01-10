@@ -16,6 +16,6 @@ deploy:
   provider: rubygems
   api_key:
     secure: "WedxLnl2uWxoRPApA8+t3uwwLo/X09bQIFQuIZy1LDgaMsQD6LDaftAXm2//3IxxIy8leQTroSmNq+DRsnGutnZXITwaV79SEBBjmiDv+RriL8vAXiqBx5k1XrdZs0WMkeJZRrR3waWeh7tyKz9sGHKhPap7nOdCzCWPBDj+SvNAEjKkz3N5Zpw1WLYgzP1Ezs3lulT3nE5aiUlafs43JbpG1xyZ5QtGJA4l27mJirMwA04wCOSOF27ZnkOgu9bT3TY7w8BdN/iwI+zdKwZ8RJbbo3JDqdhB1ED7VOQ7U6FDT8OeGeLb+QVUtEimc7EHlrCV48+RjyKpMZ8mC/ZBQjqO3YRUlr7exT5COkoAXo2OwXzhyWZrx9LTmSDcHoJ5tXy2D48+z/t8uJC0JlDQhD5zlT/ncTqlKMddwxIQPITFMUkldkBowCDYX7wdkWA0HryI+cj9NMad2pmW6KRRRWhDbQmlLzpV5F+6y5NlfGdAzbgWo3MJ73inHihYtECnCC4qgYZK3lp0PCaL2XVjAeY4Di/bhgDJKFz7BeCY7TEic+kTC/E0vHGnv9IK6NJmYgHE6yi83gwVfU/G0QYcXLKvdU85YycYIvl9IR9kW8U2sSvyzg5GG+zilRH3Ri6ilR4F8dt4iIxD0msMtPxus5bGMqinipVGhEUcA3qoLJE="
-  gem: lita-discord_oauth
+  gem: lita-diabetter
   on:
     all_branches: true
