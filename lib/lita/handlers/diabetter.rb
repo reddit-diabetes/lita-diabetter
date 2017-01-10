@@ -50,8 +50,13 @@ module Lita
 
           type = 'mmol'
         elsif input.to_f >= @@lower && input.to_f < @@upper
-          mmol = mgdl_to_mmol(input.to_f).round(1)
-          mgdl = mmol_to_mgdl(input.to_f)
+          mmol = input.to_f.round(1)
+          mgdl_from_mmol = mmol_to_mgdl(input.to_f)
+          mgdl = input.to_f
+
+          dcct_alt = mgdl_to_dcct(mgdl_from_mmol)
+          ifcc_alt = dcct_to_ifcc(dcct_alt).round(0).to_s
+          dcct_alt = dcct.round(1).to_s
 
           type = 'unknown'
         else
@@ -68,7 +73,7 @@ module Lita
 
         if type == 'unknown'
           reply = "*I'm not sure if you entered mmol/L or mg/dL, so I'll give you both*\n"
-          reply += make_average_sentence('mmol', mmol, dcct, ifcc) + "\n"
+          reply += make_average_sentence('mmol', mmol, dcct_alt, ifcc_alt) + "\n"
           reply += make_average_sentence('mgdl', mgdl, dcct, ifcc)
         elsif type=='mmol'
           reply = make_average_sentence('mmol', mmol, dcct, ifcc)
