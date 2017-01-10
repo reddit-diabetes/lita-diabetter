@@ -13,9 +13,16 @@ module Lita
       route(/estimate a1c(?: from average)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_a1c, command: true, help: {
           'estimate a1c [from average] <glucose level>' => 'Estimates A1C based on average BG level'
       })
+
       route(/estimate average(?: from a1c)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_average_from_a1c, command: true, help: {
           'estimate average [from a1c] <A1C>' => 'Estimates average blood glucose'
       })
+
+      route(/^-diabot.*/, :deprecated, command: true)
+
+      def deprecated(response)
+        response.reply('The -diabot prefix is deprecated. See `diabot help` for more info')
+      end
 
       def convert(response)
         if response.message.body.match(URI.regexp(%w(http https))).nil?
