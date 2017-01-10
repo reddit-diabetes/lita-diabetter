@@ -1,7 +1,7 @@
 # lita-diabetter
 
 [![Build Status](https://travis-ci.org/cascer1/lita-diabetter.png?branch=master)](https://travis-ci.org/cascer1/lita-diabetter)
-[![Coverage Status](https://coveralls.io/repos/cascer1/lita-diabetter/badge.png)](https://coveralls.io/r/cascer1/lita-diabetter)
+[![Gem Version](https://badge.fury.io/rb/lita-diabetter.svg)](https://badge.fury.io/rb/lita-diabetter)
 
 TODO: Add a description of the plugin.
 
