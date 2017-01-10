@@ -29,7 +29,7 @@ TODO: Describe the plugin's features and how to use them.
 [travis-url]: https://travis-ci.org/cascer1/lita-diabetter
 [gem-img]: https://img.shields.io/gem/v/lita-diabetter.svg
 [gem-url]: https://badge.fury.io/rb/lita-diabetter
-[gem-dl-img]: https://img.shields.io/gem/dtv/lita-diabetter.svg
+[gem-dl-img]: https://img.shields.io/gem/dv/lita-diabetter/stable.svg
 [gem-dep-img]: https://img.shields.io/gemnasium/cascer1/lita-diabetter.svg
 [gem-dep-url]: https://gemnasium.com/github.com/cascer1/lita-diabetter
 [codacy-img]: https://img.shields.io/codacy/grade/218ed88601a243ccae18e98e590b622d.svg
