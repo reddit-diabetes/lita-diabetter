@@ -63,16 +63,17 @@ module Lita
 
         dcct = mgdl_to_dcct(mgdl)
         ifcc = dcct_to_ifcc(dcct).round(0).to_s
+        dcct = dcct.round(1).to_s
 
 
         if type == 'unknown'
           reply = "*I'm not sure if you entered mmol/L or mg/dL, so I'll give you both*\n"
-          reply += make_average_sentence('mmol', mmol, dcct.to_s, ifcc) + "\n"
-          reply += make_average_sentence('mgdl', mgdl, dcct.to_s, ifcc)
+          reply += make_average_sentence('mmol', mmol, dcct, ifcc) + "\n"
+          reply += make_average_sentence('mgdl', mgdl, dcct, ifcc)
         elsif type=='mmol'
-          reply = make_average_sentence('mmol', mmol, dcct.to_s, ifcc)
+          reply = make_average_sentence('mmol', mmol, dcct, ifcc)
         else
-          reply = make_average_sentence('mgdl', mgdl, dcct.to_s, ifcc)
+          reply = make_average_sentence('mgdl', mgdl, dcct, ifcc)
         end
 
         response.reply(reply)
