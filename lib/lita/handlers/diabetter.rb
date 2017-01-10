@@ -2,6 +2,9 @@ module Lita
   module Handlers
     class Diabetter < Handler
       @@conversion_ratio = 18.0182
+      @@lower = 25.0 # Lower limit for mmol/L - mg/dL cutoff
+      @@upper = 50.0 # Upper limit for mmol/L - mg/dL cutoff
+
       route(/(?:^|_)(\d{1,3}|\d{1,2}\.\d+)(?:$|_)/, :convert, command: false, help: {
           '<number>' => 'Convert glucose between mass/molar concentration units.',
           '_<number>_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at _125_ today"'
@@ -18,13 +21,10 @@ module Lita
         if response.message.body.match(URI.regexp(%w(http https))).nil?
           input = response.matches[0][0]
           Lita.logger.debug('Converting BG for input "' + input + '"')
-          lower = 25.0
-          upper = 50.0
 
-
-          if input.to_f < lower
+          if input.to_f < @@lower
             response.reply("#{input} mmol/L is #{mmol_to_mgdl(input).to_s} mg/dL")
-          elsif input.to_f >= lower && input.to_f < upper
+          elsif input.to_f >= @@lower && input.to_f < @@upper
             mmol = mgdl_to_mmol(input).to_s
             mgdl = mmol_to_mgdl(input).to_s
 
@@ -42,24 +42,50 @@ module Lita
       def estimate_a1c(response)
         input = response.matches[0][0]
         Lita.logger.debug('Estimating a1c for input "' + input + '"')
-        mmol = 0
-        mgdl = 0
 
-        if input.index('.') == nil
-          mgdl = input.to_i
-          mmol = mgdl_to_mmol(mgdl)
-        else
+
+        if input.to_f < @@lower
           mmol = input.to_f.round(1)
           mgdl = mmol_to_mgdl(mmol)
+
+          type = 'mmol'
+        elsif input.to_f >= @@lower && input.to_f < @@upper
+          mmol = mgdl_to_mmol(input.to_f).round(1)
+          mgdl = mmol_to_mgdl(input.to_f)
+
+          type = 'unknown'
+        else
+          mgdl = input.to_i
+          mmol = mgdl_to_mmol(mgdl)
+
+          type = 'mgdl'
         end
 
         dcct = mgdl_to_dcct(mgdl)
-        reply = 'an average of ' + mgdl.to_s + ' mg/dL or '
-        reply = reply + mmol.to_s + ' mmol/L'
-        reply = reply + ' is about '
-        reply = reply + dcct.round(1).to_s + '% (DCCT) or '
-        reply = reply + dcct_to_ifcc(dcct).round(0).to_s + ' mmol/mol (IFCC)'
+        ifcc = dcct_to_ifcc(dcct).round(0).to_s
+
+
+        if type == 'unknown'
+          reply = "*I'm not sure if you entered mmol/L or mg/dL, so I'll give you both*\n"
+          reply += make_average_sentence('mmol', mmol, dcct.to_s, ifcc) + "\n"
+          reply += make_average_sentence('mgdl', mgdl, dcct.to_s, ifcc)
+        elsif type=='mmol'
+          reply = make_average_sentence('mmol', mmol, dcct.to_s, ifcc)
+        else
+          reply = make_average_sentence('mgdl', mgdl, dcct.to_s, ifcc)
+        end
+
         response.reply(reply)
+      end
+
+      def make_average_sentence(type, value, dcct, ifcc)
+        if type == 'mmol'
+          string = "An average of **#{value} mmol/L** is about "
+        elsif type == 'mgdl'
+          string = "An average of **#{value} mg/dL** is about "
+        end
+
+        string += "**#{dcct}%** (DCCT) or **#{ifcc} mmol/mol** (IFCC)"
       end
 
       def estimate_average_from_a1c(response)
