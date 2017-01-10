@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.3.0
+- 2.3.0
 notifications:
   email:
     recipients:
@@ -9,13 +9,13 @@ notifications:
     on_failure: change
 script: bundle exec rake
 before_install:
-  - gem update --system
+- gem update --system
 services:
-  - redis-server
+- redis-server
 deploy:
   provider: rubygems
   api_key:
-    secure: WedxLnl2uWxoRPApA8+t3uwwLo/X09bQIFQuIZy1LDgaMsQD6LDaftAXm2//3IxxIy8leQTroSmNq+DRsnGutnZXITwaV79SEBBjmiDv+RriL8vAXiqBx5k1XrdZs0WMkeJZRrR3waWeh7tyKz9sGHKhPap7nOdCzCWPBDj+SvNAEjKkz3N5Zpw1WLYgzP1Ezs3lulT3nE5aiUlafs43JbpG1xyZ5QtGJA4l27mJirMwA04wCOSOF27ZnkOgu9bT3TY7w8BdN/iwI+zdKwZ8RJbbo3JDqdhB1ED7VOQ7U6FDT8OeGeLb+QVUtEimc7EHlrCV48+RjyKpMZ8mC/ZBQjqO3YRUlr7exT5COkoAXo2OwXzhyWZrx9LTmSDcHoJ5tXy2D48+z/t8uJC0JlDQhD5zlT/ncTqlKMddwxIQPITFMUkldkBowCDYX7wdkWA0HryI+cj9NMad2pmW6KRRRWhDbQmlLzpV5F+6y5NlfGdAzbgWo3MJ73inHihYtECnCC4qgYZK3lp0PCaL2XVjAeY4Di/bhgDJKFz7BeCY7TEic+kTC/E0vHGnv9IK6NJmYgHE6yi83gwVfU/G0QYcXLKvdU85YycYIvl9IR9kW8U2sSvyzg5GG+zilRH3Ri6ilR4F8dt4iIxD0msMtPxus5bGMqinipVGhEUcA3qoLJE=
+    secure: "xEC9fzPXl1/la7ONuPipqXpbOEpA3GhIm+Dc74OPl20+RbOjHGmhRWOQWi4DCX/zNnWFKnIPxp0NMT2mW28hqRZBaUPKj9jN3AnrJ6EgWOaaWkAkwhXBou16+5Xgz2U8K7TB/CFIv41avONQJxUUITEKF+6+7U25ixkbbPeMttMOSx4WrlJmSfR2bz3LyCdniK3EyD7wTGz6FWpPIjdV3ZApJDL+/0yFm6hrilsq3aMtnrdaGdQ+tQtSNlT/PhBtRYkQs+0WlkmHfUaS3EDHbGw9vI2NBmp7EoPnmKNbyHmHb6EyXa8X/oMFvhwVoaRE8Gw5jkJJthCDTsfuTUq7s90/URwtCPGBs+eP1FQROBnw55oH2lBzoZ98l3p/7+T3QHKlQRRjr3XP4FkyxF/hiOylBk6COWLfDQqijmmSWfgeGykyo4Vk8jvV820HpOa95GmrB+k1qPPgezJi9kC/8rIzKV0LhqlmNuGqtWTAFFPqnM4Lo7pCfw1tRxyITQ3xObr/xRLHcgKr6ZMg5SwgN/Qrc8FXD31c77kaVUQg4dJSUSo9OAwrKprqC0tvUprIknXoXTpfxaYUKr9yPSBdXUGgidZTjA6kHdo0VXt3kPJXlccN+YzLsRgmq+k2XXoDncLhYTAQN6KaCLCnGX/OCBKVhFUnALLp95djdH1gYQg="
   gem: lita-diabetter
   on:
     all_branches: true
