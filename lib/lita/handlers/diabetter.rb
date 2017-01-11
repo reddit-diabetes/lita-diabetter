@@ -18,7 +18,7 @@ module Lita
           'estimate average [from a1c] <A1C>' => 'Estimates average blood glucose'
       })
 
-      route(/^-diabot.*$/i, :deprecated, command: true)
+      route(/^-diabot.*$/i, :deprecated, command: false)
 
       def deprecated(response)
         response.reply('The -diabot prefix is deprecated. See `diabot help` for more info')
