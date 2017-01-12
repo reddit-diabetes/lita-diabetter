@@ -1,12 +1,16 @@
 Gem::Specification.new do |spec|
+  base_version = '1.2.0'
+
   spec.name          = 'lita-diabetter'
-  spec.version       = '1.1.0'
+  spec.version       = base_version
 
   branch_name = ENV['TRAVIS_BRANCH']
 
-  spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'develop' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
-  spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'release' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
-  spec.version       = "#{spec.version}.pull.#{ENV['TARVIS_PULL_REQUEST']}" if ENV['TRAVIS'] && ENV['TRAVIS_PULL_REQUEST'] != 'false'
+  is_release = branch_name.include? 'release/'
+
+  spec.version       = "#{base_version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name != 'master' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
+  spec.version       = "#{base_version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && is_release && ENV['TRAVIS_PULL_REQUEST'] == 'false'
+  spec.version       = "#{base_version}.pull.#{ENV['TARVIS_PULL_REQUEST']}" if ENV['TRAVIS'] && ENV['TRAVIS_PULL_REQUEST'] != 'false'
   spec.authors       = ['Cas Eliëns']
   spec.email         = ['cas.eliens@gmail.com']
   spec.description   = 'A better diabetes handler for Lita'
