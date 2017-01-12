@@ -4,9 +4,15 @@ Gem::Specification.new do |spec|
   spec.name          = 'lita-diabetter'
   spec.version       = base_version
 
-  branch_name = ENV['TRAVIS_BRANCH']
+  if ENV['TRAVIS']
+    branch_name = ENV['TRAVIS_BRANCH']
 
-  is_release = branch_name.include? 'release/'
+    is_release = branch_name.include? 'release/'
+  else
+    branch_name = 'master'
+    is_release = false
+  end
+
 
   spec.version       = "#{base_version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name != 'master' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
   spec.version       = "#{base_version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && is_release && ENV['TRAVIS_PULL_REQUEST'] == 'false'
@@ -30,9 +36,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'lita', '~> 4.7'
+  # spec.add_runtime_dependency 'lita', '~> 4.7'
   spec.required_ruby_version = '>= 2.0.0'
 
+  spec.add_development_dependency 'lita', '~> 4.7'
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rake', '~> 10.4.2'

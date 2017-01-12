@@ -1,8 +1,7 @@
 PATH
   remote: .
   specs:
-    lita-diabetter (1.2.0)
-      lita (~> 4.7)
+    lita-diabetter (1.2.1)
 
 GEM
   remote: https://rubygems.org/
