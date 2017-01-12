@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  base_version = '1.2.0'
+  base_version = '1.2.1'
 
   spec.name          = 'lita-diabetter'
   spec.version       = base_version
@@ -33,7 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'lita', '~> 4.7'
   spec.required_ruby_version = '>= 2.0.0'
 
-  spec.add_development_dependency 'lita', '~> 4.7'
   spec.add_development_dependency 'bundler', '~> 1.3'
   spec.add_development_dependency 'pry-byebug'
   spec.add_development_dependency 'rake', '~> 10.4.2'
