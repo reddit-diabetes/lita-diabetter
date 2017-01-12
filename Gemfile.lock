@@ -73,7 +73,7 @@ DEPENDENCIES
   lita-diabetter!
   pry-byebug
   rack-test
-  rake (< 11.0)
+  rake (~> 10.4.2)
   rspec (~> 3.0.0)
 
 BUNDLED WITH
