@@ -1,6 +1,13 @@
 Gem::Specification.new do |spec|
   spec.name          = 'lita-diabetter'
   spec.version       = '1.1.0'
+
+  branch_name = ENV['TRAVIS_BRANCH']
+  tag_name = ENV['TRAVIS_TAG']
+
+  puts branch_name
+  puts tag_name
+
   spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.authors       = ['Cas Eliëns']
   spec.email         = ['cas.eliens@gmail.com']
