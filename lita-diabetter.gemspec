@@ -5,10 +5,14 @@ Gem::Specification.new do |spec|
   branch_name = ENV['TRAVIS_BRANCH']
   tag_name = ENV['TRAVIS_TAG']
 
-  puts branch_name
-  puts tag_name
+  if ENV['TRAVIS']
+    puts 'Branch: ' + branch_name
+    puts 'Tag: ' + tag_name
+  end
 
-  spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
+  spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'develop'
+  spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'release' && !ENV['TRAVIS_PULL_REQUEST']
+  spec.version       = "#{spec.version}.pull.#{ENV['TARVIS_PULL_REQUEST']}" if ENV['TRAVIS'] && ENV['TRAVIS_PULL_REQUEST']
   spec.authors       = ['Cas Eliëns']
   spec.email         = ['cas.eliens@gmail.com']
   spec.description   = 'A better diabetes handler for Lita'
