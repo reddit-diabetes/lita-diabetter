@@ -4,8 +4,10 @@ Gem::Specification.new do |spec|
 
   branch_name = ENV['TRAVIS_BRANCH']
 
-  spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'develop' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
-  spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'release' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
+  is_release = branch_name.slice!('release/') == 'release/'
+
+  spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name != 'master' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
+  spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && is_release && ENV['TRAVIS_PULL_REQUEST'] == 'false'
   spec.version       = "#{spec.version}.pull.#{ENV['TARVIS_PULL_REQUEST']}" if ENV['TRAVIS'] && ENV['TRAVIS_PULL_REQUEST'] != 'false'
   spec.authors       = ['Cas Eliëns']
   spec.email         = ['cas.eliens@gmail.com']
