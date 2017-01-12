@@ -4,7 +4,7 @@ Gem::Specification.new do |spec|
 
   branch_name = ENV['TRAVIS_BRANCH']
 
-  is_release = branch_name.slice!('release/') == 'release/'
+  is_release = branch_name.include? 'release/'
 
   spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name != 'master' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
   spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && is_release && ENV['TRAVIS_PULL_REQUEST'] == 'false'
