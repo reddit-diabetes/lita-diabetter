@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'lita-diabetter'
-  spec.version       = '1.1.0'
+  spec.version       = '1.2.0'
 
   branch_name = ENV['TRAVIS_BRANCH']
 
