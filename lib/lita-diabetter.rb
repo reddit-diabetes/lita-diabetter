@@ -5,7 +5,7 @@ Lita.load_locales Dir[File.expand_path(
 )]
 
 require 'lita/handlers/diabetter'
-require 'lita/handlers/diabetter-misc'
+require 'lita/handlers/diabettermisc'
 
 Lita::Handlers::Diabetter.template_root File.expand_path(
   File.join('..', '..', 'templates'),
