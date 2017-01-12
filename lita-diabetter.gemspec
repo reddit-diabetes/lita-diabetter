@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   if ENV['TRAVIS']
     puts 'Branch: ' + ENV['TRAVIS_BRANCH']
     puts 'Tag: '    + ENV['TRAVIS_TAG']
-    puts 'Release: '+ spec.version
+    puts 'Release: '+ spec.version.to_s
   end
 
   spec.files         = `git ls-files`.split($/)
