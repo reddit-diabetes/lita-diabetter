@@ -3,12 +3,6 @@ Gem::Specification.new do |spec|
   spec.version       = '1.1.0'
 
   branch_name = ENV['TRAVIS_BRANCH']
-  tag_name = ENV['TRAVIS_TAG']
-
-  if ENV['TRAVIS']
-    puts 'Branch: ' + branch_name
-    puts 'Tag: ' + tag_name
-  end
 
   spec.version       = "#{spec.version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'develop' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
   spec.version       = "#{spec.version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name == 'release' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
@@ -20,6 +14,12 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/cascer1/lita-diabetter'
   spec.license       = 'GPL-3.0+'
   spec.metadata      = {'lita_plugin_type' => 'handler'}
+
+  if ENV['TRAVIS']
+    puts 'Branch: ' + ENV['TRAVIS_BRANCH']
+    puts 'Tag: '    + ENV['TRAVIS_TAG']
+    puts 'Release: '+ spec.version
+  end
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
