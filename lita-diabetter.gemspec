@@ -4,9 +4,15 @@ Gem::Specification.new do |spec|
   spec.name          = 'lita-diabetter'
   spec.version       = base_version
 
-  branch_name = ENV['TRAVIS_BRANCH']
+  if ENV['TRAVIS']
+    branch_name = ENV['TRAVIS_BRANCH']
 
-  is_release = branch_name.include? 'release/'
+    is_release = branch_name.include? 'release/'
+  else
+    branch_name = 'master'
+    is_release = false
+  end
+
 
   spec.version       = "#{base_version}.alpha.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && branch_name != 'master' && ENV['TRAVIS_PULL_REQUEST'] == 'false'
   spec.version       = "#{base_version}.rc.#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS'] && is_release && ENV['TRAVIS_PULL_REQUEST'] == 'false'
