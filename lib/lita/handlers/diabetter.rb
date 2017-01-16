@@ -29,7 +29,7 @@ module Lita
             mmol = mgdl_to_mmol(input).to_s
             mgdl = mmol_to_mgdl(input).to_s
 
-            result = '*I\'m not sure if you gave me mmol/L or mg/dL, so I\'ll give you both.*\n'
+            result = "*I'm not sure if you gave me mmol/L or mg/dL, so I'll give you both.*\n"
             result += "#{input} mg/dL is **#{mmol} mmol/L**\n"
             result += "#{input} mmol/L is **#{mgdl} mg/dL**"
 
