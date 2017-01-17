@@ -6,8 +6,7 @@ module Lita
 
       route(/^diabetes y$/i, :diabetesy, command: false, restrict_to: :diabot_meme)
 
-      route(/^diab((etes)|(ot)) plz$/i, :plz, command: false, restrict_to: :diabot_meme)
-      route(/plz/i, :plz, command: true, restrict_to: :diabot_meme)
+      route(/^(?:diab((etes)|(ot)) )?plz$/i, :plz, command: false, restrict_to: :diabot_meme)
 
       def deprecated(response)
         response.reply('The -diabot prefix is deprecated. See `diabot help` for more info')
