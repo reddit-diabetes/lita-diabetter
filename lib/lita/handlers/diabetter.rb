@@ -6,16 +6,16 @@ module Lita
       @@upper = 50.0 # Upper limit for mmol/L - mg/dL cutoff
 
       route(/(?:^|_)(\d{1,3}|\d{1,2}\.\d+)(?:$|_)/, :convert, command: false, help: {
-          '<number>' => 'Convert glucose between mass/molar concentration units.',
+          '<number>' => 'Convert glucose between mass/molar concentration units. Attempts to guess which way you want to convert',
           '_<number>_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at _125_ today"'
       })
 
       route(/(\d{1,3}\.?\d?)\s?(mmol\/?l?)/i, :convert_mmol, command: false, help: {
-          '<number> mmol' => 'Convert glucose from mmol/L to mg/dL'
+          '<number> mmol' => 'Convert glucose from mmol/L to mg/dL, works inline or on its own. E.g "My BG is 5.7 mmol/L"'
       })
 
       route(/(\d{1,3}\.?\d?)\s?(mg\/?(dl)?)/i, :convert_mgdl, command: false, help: {
-          '<number> mgdl' => 'Convert glucose from mg/dL to mmol/L'
+          '<number> mgdl' => 'Convert glucose from mg/dL to mmol/L, works inline or on its own. E.g "My BG is 110 mg/dL"'
       })
 
 
