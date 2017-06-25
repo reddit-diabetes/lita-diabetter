@@ -14,6 +14,11 @@ module Lita
           '<number> mmol' => 'Convert glucose from mmol/L to mg/dL'
       })
 
+      route(/(\d{1,3}\.?\d?)\s?(mg\/?(dl)?)/i, :convert_mgdl, command: false, help: {
+          '<number> mgdl' => 'Convert glucose from mg/dL to mmol/L'
+      })
+
+
       route(/estimate a1c(?: from average)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_a1c, command: true, help: {
           'estimate a1c [from average] <glucose level>' => 'Estimates A1C based on average BG level'
       })
@@ -49,6 +54,14 @@ module Lita
           input = response.matches[0][0]
           Lita.logger.debug('Converting BG for input "' + input + '" from mmol/L to mg/dL')
           response.reply("#{input} mmol/L is #{mmol_to_mgdl(input).to_s} mg/dL")
+        end
+      end
+
+      def convert_mgdl(response)
+        if response.message.body.match(URI.regexp(%w(http https))).nil?
+          input = response.matches[0][0]
+          Lita.logger.debug('Converting BG for input "' + input + '" from mg/dL to mmol/L')
+          response.reply("#{input} mg/dL is #{mgdl_to_mmol(input).to_s} mmol/L")
         end
       end
 
