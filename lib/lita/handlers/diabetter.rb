@@ -10,6 +10,10 @@ module Lita
           '_<number>_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at _125_ today"'
       })
 
+      route(/(\d{1,3}\.?\d?)\s?(mmol\/?l?)/i, :convert_mmol, command: false, help: {
+          '<number> mmol' => 'Convert glucose from mmol/L to mg/dL'
+      })
+
       route(/estimate a1c(?: from average)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_a1c, command: true, help: {
           'estimate a1c [from average] <glucose level>' => 'Estimates A1C based on average BG level'
       })
@@ -37,6 +41,14 @@ module Lita
           else
             response.reply("#{input} mg/dL is #{mgdl_to_mmol(input).to_s} mmol/L")
           end
+        end
+      end
+
+      def convert_mmol(response)
+        if response.message.body.match(URI.regexp(%w(http https))).nil?
+          input = response.matches[0][0]
+          Lita.logger.debug('Converting BG for input "' + input + '" from mmol/L to mg/dL')
+          response.reply("#{input} mmol/L is #{mmol_to_mgdl(input).to_s} mg/dL")
         end
       end
 
