@@ -6,9 +6,18 @@ module Lita
       @@upper = 50.0 # Upper limit for mmol/L - mg/dL cutoff
 
       route(/(?:^|_)(\d{1,3}|\d{1,2}\.\d+)(?:$|_)/, :convert, command: false, help: {
-          '<number>' => 'Convert glucose between mass/molar concentration units.',
+          '<number>' => 'Convert glucose between mass/molar concentration units. Attempts to guess which way you want to convert',
           '_<number>_' => 'Convert glucose between mass/molar concentration units inline. E.g "I started at _125_ today"'
       })
+
+      route(/(\d{1,3}\.?\d?)\s?(mmol\/?l?)/i, :convert_mmol, command: false, help: {
+          '<number> mmol' => 'Convert glucose from mmol/L to mg/dL, works inline or on its own. E.g "My BG is 5.7 mmol/L"'
+      })
+
+      route(/(\d{1,3}\.?\d?)\s?(mg\/?(dl)?)/i, :convert_mgdl, command: false, help: {
+          '<number> mgdl' => 'Convert glucose from mg/dL to mmol/L, works inline or on its own. E.g "My BG is 110 mg/dL"'
+      })
+
 
       route(/estimate a1c(?: from average)?\s+(\d{1,3}|\d{1,2}\.\d+)$/i, :estimate_a1c, command: true, help: {
           'estimate a1c [from average] <glucose level>' => 'Estimates A1C based on average BG level'
@@ -37,6 +46,22 @@ module Lita
           else
             response.reply("#{input} mg/dL is #{mgdl_to_mmol(input).to_s} mmol/L")
           end
+        end
+      end
+
+      def convert_mmol(response)
+        if response.message.body.match(URI.regexp(%w(http https))).nil?
+          input = response.matches[0][0]
+          Lita.logger.debug('Converting BG for input "' + input + '" from mmol/L to mg/dL')
+          response.reply("#{input} mmol/L is #{mmol_to_mgdl(input).to_s} mg/dL")
+        end
+      end
+
+      def convert_mgdl(response)
+        if response.message.body.match(URI.regexp(%w(http https))).nil?
+          input = response.matches[0][0]
+          Lita.logger.debug('Converting BG for input "' + input + '" from mg/dL to mmol/L')
+          response.reply("#{input} mg/dL is #{mgdl_to_mmol(input).to_s} mmol/L")
         end
       end
 
