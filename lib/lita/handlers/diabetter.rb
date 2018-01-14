@@ -27,7 +27,7 @@ module Lita
           'estimate average [from a1c] <A1C>' => 'Estimates average blood glucose'
       })
 
-      route(/estimate average(?: from a1c)?\s+(\d{1,3}\.?\d?)\s+%$/i, :estimate_average_from_dcct, command: true, help: {
+      route(/estimate average(?: from a1c)?\s+(\d{1,3}\.?\d?)\s?+%$/i, :estimate_average_from_dcct, command: true, help: {
           'estimate average [from a1c] <A1C>%' => 'Estimates average blood glucose from DCCT HbA1c (%)'
       })
 
