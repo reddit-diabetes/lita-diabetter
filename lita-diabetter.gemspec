@@ -1,5 +1,5 @@
 Gem::Specification.new do |spec|
-  base_version = '1.3.0'
+  base_version = '1.3.1'
 
   spec.name          = 'lita-diabetter'
   spec.version       = base_version
