@@ -27,6 +27,10 @@ module Lita
           'estimate average [from a1c] <A1C>' => 'Estimates average blood glucose'
       })
 
+      route(/estimate average(?: from a1c)?\s+(\d{1,3}\.?\d?)\s+%$/i, :estimate_average_from_dcct, command: true, help: {
+          'estimate average [from a1c] <A1C>%' => 'Estimates average blood glucose from DCCT HbA1c (%)'
+      })
+
       def convert(response)
         if response.message.body.match(URI.regexp(%w(http https))).nil?
           input = response.matches[0][0]
@@ -101,7 +105,7 @@ module Lita
           reply = "*I'm not sure if you entered mmol/L or mg/dL, so I'll give you both*\n"
           reply += make_average_sentence('mmol', mmol, dcct_alt, ifcc_alt) + "\n"
           reply += make_average_sentence('mgdl', mgdl, dcct, ifcc)
-        elsif type=='mmol'
+        elsif type == 'mmol'
           reply = make_average_sentence('mmol', mmol, dcct, ifcc)
         else
           reply = make_average_sentence('mgdl', mgdl, dcct, ifcc)
@@ -136,12 +140,29 @@ module Lita
         end
 
         mgdl = dcct_to_mgdl(dcct)
+        mmol = mgdl_to_mmol(mgdl).round(1)
 
         reply = 'an A1C of ' + dcct.to_s + '% (DCCT) or '
         reply = reply + ifcc.to_s + ' mmol/mol (IFCC)'
         reply = reply + ' is about '
         reply = reply + mgdl.round.to_s + ' mg/dL or '
-        reply = reply + mgdl_to_mmol(mgdl).round(1).to_s + ' mmol/L'
+        reply = reply + mmol.to_s + ' mmol/L'
+        response.reply(reply)
+      end
+
+      def estimate_average_from_dcct(response)
+        input = response.matches[0][0]
+        Lita.logger.debug('Converting a1c to BG for input "' + input + '"')
+        a1c = input.to_f
+        dcct = a1c.round(1)
+
+        mgdl = dcct_to_mgdl(dcct)
+        mmol = mgdl_to_mmol(mgdl).round(1)
+
+        reply = 'an A1C of ' + dcct.to_s + '%'
+        reply = reply + ' is about '
+        reply = reply + mgdl.round.to_s + ' mg/dL or '
+        reply = reply + mmol.to_s + ' mmol/L'
         response.reply(reply)
       end
 
