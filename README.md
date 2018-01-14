@@ -1,7 +1,6 @@
 # lita-diabetter
 
 [![Build Status][travis-img]][travis-url]
-[![Dependency status][gem-dep-img]][gem-dep-url]
 [![Codacy Badge][codacy-img]][codacy-url]
 
 TODO: Add a description of the plugin.
@@ -25,7 +24,5 @@ TODO: Describe the plugin's features and how to use them.
 
 [travis-img]: https://img.shields.io/travis/reddit-diabetes/lita-diabetter.svg
 [travis-url]: https://travis-ci.org/reddit-diabetes/lita-diabetter
-[gem-dep-img]: https://img.shields.io/gemnasium/reddit-diabetes/lita-diabetter.svg
-[gem-dep-url]: https://gemnasium.com/github.com/reddit-diabetes/lita-diabetter
 [codacy-img]: https://img.shields.io/codacy/grade/961f455809254f509472986930d06d46.svg
-[codacy-url]: ttps://www.codacy.com/app/cascer1/lita-diabetter_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=reddit-diabetes/lita-diabetter&amp;utm_campaign=Badge_Grade
+[codacy-url]: https://www.codacy.com/app/cascer1/lita-diabetter_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=reddit-diabetes/lita-diabetter&amp;utm_campaign=Badge_Grade
